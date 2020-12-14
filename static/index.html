@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>同好会烤推机</title>
+    <meta charset="UTF-8">
+
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/html2canvas.js"></script>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+
+<body>
+    <div class="screenshotwrapper">
+
+        <div id="screenshots" style="width: 640px">
+            <div id="sample-sc">
+                <div id="sc0-0" class="sc-box" style="height: 600px;">
+                    <img src="/static/img/twittersample.jpg">
+                    <div class="trans-box" id="trans0-0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="settingsfiller"></div>
+    </div>
+    <div class="settingswrapper">
+        <div class="settingshandle">
+            ···
+        </div>
+        <div class="settingswrapperscroller">
+            <div class="container settingscontainer" style="padding-top: 32px;padding-left: 16px">
+                <h4 style="margin-bottom: 1.5rem">烤推机 - 同好会改 v1.0</h4>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Twitter URL" id="url"
+                        value="https://twitter.com/" aria-label="Twitter URL" aria-describedby="button-submit">
+                    <input type="text" class="form-control" id="progress" aria-describedby="button-submit" disabled
+                        style="display: none;border-top-left-radius: .25rem;border-bottom-left-radius: .25rem;">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-submit"
+                            onclick="run()">运行</button>
+                    </div>
+                </div>
+                <div class="tablewrapper mb-3">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 10%">#</th>
+                                <th scope="col" style="width: 40%">原文</th>
+                                <th scope="col" style="width: 40%">翻译</th>
+                            </tr>
+                        </thead>
+                        <tbody id="translatetbody">
+                            <tr id="sample-tab">
+                                <th scope="row">
+                                    <p class="index">0-0</p>
+                                    <input type="checkbox" id="check0-0" class="switch" checked="">
+                                </th>
+                                <td class="originaltext"></td>
+                                <td>
+                                    <div class="translatetd">
+                                        <div class="input-group">
+                                            <textarea id="text0-0" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group mb-3" style="width: 100%;">
+                    <button class="btn btn-outline-primary" id="save-btn" style="flex: 5 1 auto;">生成图片</button>
+                    <button class="btn btn-outline-secondary" id="template-btn">翻译模板</button>
+                </div>
+                <div class="input-group mb-3">
+                    <textarea class="form-control" id="translatetemp" style="display: none;height: 300px;"
+                              aria-label="With textarea"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="img-show" style="position:fixed; overflow:auto; top:0; left:0; background:rgba(0,0,0,0.7); z-index:2; width:100%; height:100%; display:none;">
+        <div id="save-img" class="save-img"></div>
+    </div>
+    <script src="/static/utils.js"></script>
+</body>
+
+</html>
