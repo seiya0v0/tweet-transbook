@@ -6,8 +6,7 @@ import os
 import re
 import json
 import auto
-from multiprocessing import Pool, Queue
-import logging 
+# from multiprocessing import Pool, Queue
 
 class Handler(BaseHTTPRequestHandler):
 
