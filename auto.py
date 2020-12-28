@@ -73,8 +73,8 @@ class RepProcesser:
                             document.querySelectorAll("article div[role=group]").forEach(o=>o.remove());
                         } catch {}
                     ''')
-                    tweet.find_element_by_tag_name("article")  # raise a error when no element be found.
-                    interact.append(tweet)
+                    article = tweet.find_element_by_tag_name("article")  # raise a error when no element be found.
+                    interact.append(article)
             except:
                 if len(interact) >= 2 or (                    # have interact each other.
                 self.count == 0 and len(interact) == 1):      # the main tweet.
@@ -122,6 +122,22 @@ class RepProcesser:
                     article.children[3].remove();
                 ''')
                 sc_name = "main" + info["user"]
+                # to divide the text and time info.
+                time_info = element.find_element_by_xpath("//div/div/div/div[3]/div[3]")
+                if not os.path.exists(self.data_path + 'main_time.png'):
+                    time_info.screenshot(self.data_path + 'main_time.png')
+                self.driver.execute_script('''
+                    var article = document.querySelectorAll("article>div>div>div>div")[2];
+                    article.children[2].remove();
+                ''')
+                data = {
+                    "datetime": "",
+                    "text": "",
+                    "user": "@KaguraMea_VoV",
+                    "img": self.data_path + 'main_time.png',
+                    "index": "1-2"
+                }
+                self.data.append(data)
             else:
                 t = info["datetime"]
                 sc_name = t[:13] + t[14:16] + t[17:19] + info["user"]  # remove the char ":" .
@@ -132,6 +148,10 @@ class RepProcesser:
             if not os.path.exists(sc_path):
                 _time.sleep(0.2)  # maybe be misplaced if too fast.
                 element.screenshot(sc_path)
+        # swap text and time of main.
+        temp = self.data[0]
+        self.data[0] = self.data[1]
+        self.data[1] = temp
         print("[推文获取]已保存 {} 条回复.".format(self.count))
 
 def execute(url):

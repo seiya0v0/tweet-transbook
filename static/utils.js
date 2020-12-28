@@ -1,26 +1,3 @@
-/**
-function change(id) {
-    var text = $("#text"+id).val();
-    document.getElementById("trans"+id).innerText = text;
-    
-}
-
-function check(id) {
-    if (document.getElementById("check"+id).checked) {
-        document.getElementById("screenshot"+id).style.display = "";
-        document.getElementById("trans"+id).style.display = "";
-    } else {
-        document.getElementById("screenshot"+id).style.display = "none";
-        document.getElementById("trans"+id).style.display = "none";
-    }
-}
-
-function into(id) {
-    document.getElementById("screenshot"+id).scrollIntoView()
-    document.getElementById("text"+id).scrollIntoView()
-}
-*/
-
 $("#save-btn").on("click", function() {
     html2canvas(document.getElementById('screenshots'), {useCORS: true}).then(canvas => {
         let saveImg = new Image();
@@ -115,8 +92,14 @@ function load(data) {
         var id = this.id.replace("check", "");
         if (this.checked) {
             $("#sc"+id).css("display", "");
+            if (id == "1-1") {
+                $("#sc1-2").css("display", "");
+            }
         } else {
             $("#sc"+id).css("display", "none");
+            if (id == "1-1") {
+                $("#sc1-2").css("display", "none");
+            }
         }
     });
 }
@@ -132,13 +115,17 @@ function loadImg(img, index) {
         <img src="${img}"/>
         <div class="trans-box" id="trans${index}"></div>
     </div>`;
-    $("#screenshots").append(sc_html)
+    $("#screenshots").append(sc_html);
     if (index == "1-1") {
         $("#trans1-1").css("margin-left", "16px");
+    }
+    if (index == "1-2") {
+        $("#sc1-2").css("margin-left", "16px");
     }
 }
 
 function loadTrans(text, index) {
+    if (index == "1-2") return;
     var trans_html = `
     <tr>
         <th scope="row">
@@ -155,5 +142,5 @@ function loadTrans(text, index) {
         </td>
     </tr>
     `
-    $("#translatetbody").append(trans_html)
+    $("#translatetbody").append(trans_html);
 }
